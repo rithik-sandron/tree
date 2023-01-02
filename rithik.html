@@ -1,0 +1,134 @@
+<script>
+let isOpen = false;
+    function expandCollapse() {
+        console.log(isOpen)
+        document.querySelectorAll(".folder").forEach(folder => {
+            if(isOpen) {
+                folder.removeAttribute("open");
+                document.getElementById("expand").innerText = '+';
+            } else {
+                folder.setAttribute("open", "open");
+                document.getElementById("expand").innerText = '--';
+            }
+        })
+        isOpen = !isOpen;
+    }
+</script><style>body {
+    background: rgb(7, 8, 9);
+    font-family: sans-serif;
+    letter-spacing: .03em;
+    color: rgb(110, 202, 118);
+    text-transform: capitalize;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    overflow: auto;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+    width: 6px;
+    border-radius: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #c6c6c650;
+    display: none;
+    width: 6px;
+    border-radius: 12px;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.expand {
+    padding: 32px;
+    padding-left: 16px;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+details {
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    max-height: 2.5em !important;
+    transition: all 0.01s ease-in-out;
+}
+
+details::-webkit-details-marker {
+    display: none;
+}
+
+summary {
+    width: fit-content;
+    margin: 0.5em 0;
+    color: #222;
+    font-size: 1.1em;
+    padding: 0.1em 0.3em 0.1em 0.4em;
+    background: #548dd8cb;
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+}
+
+details>summary:focus,
+details>summary:hover {
+    background-color: #61a5fff8;
+    color: #000;
+}
+
+.folder {
+    display: block;
+    width: 100%;
+    height: fit-content;
+    margin: 1em;
+    padding: 0 0 1em 1em;
+    border-left: 0.1em #aaaaaa70 dashed;
+    border-bottom: 0.1em #aaaaaa70 dashed;
+}
+
+.folder-sub {
+    display: block;
+    width: 80%;
+    height: fit-content;
+    padding: 0.4em 0 0.4em 0.2em;
+    margin: 0;
+}
+
+p {
+    padding: 1px;
+    margin: 8px 0;
+    margin-left: 16px;
+    font-size: 1em;
+    border-bottom: 1px solid #3a81dfdf;
+    width: fit-content;
+    cursor: pointer;
+}
+
+p:focus,
+p:hover {
+    background-color: #3a81dfdf;
+    color: #222;
+}
+
+details[open] {
+    max-height: 100% !important;
+    transition: all 0.2s ease;
+}
+
+details:not([open]) .folder {
+    max-height: 0 !important;
+    transition: all 0.2s ease;
+}</style><div class="container main"><details class='folder' open><summary>Rithik</summary><div class="folder-sub"><details class='folder' false><summary>Linux </summary><div class="folder-sub"><p>Shell scripting</p><p>Distros</p><p>Dotfiles</p><p>Customization </p></div></details><details class='folder' false><summary>Web</summary><div class="folder-sub"><details class='folder' false><summary>Backend</summary><div class="folder-sub"><p>Java</p><p>Sql</p><p>Spring boot</p></div></details><details class='folder' false><summary>Frontend</summary><div class="folder-sub"><p>Javascript</p><p>React</p><p>Html</p><p>Css</p></div></details></div></details><details class='folder' false><summary>Anime</summary><div class="folder-sub"><p>Watched</p><p>To be watched</p></div></details><details class='folder' false><summary>Movies</summary><div class="folder-sub"><p>Watched</p><p>To be watched</p></div></details><details class='folder' false><summary>Series </summary><div class="folder-sub"><p>Watched</p><p>To be watched</p></div></details><details class='folder' false><summary>Gaming</summary><div class="folder-sub"><p>Played games list</p><p>To be played</p><p>Gaming hardware</p></div></details><p>Digital Art</p><p>Books</p><p>House plan & building</p><p>Gardening</p></div></details>
+    <div id="expand" class='expand' onclick='expandCollapse()'>+</div>
+    </div>
+    </details>
+   </div>

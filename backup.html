@@ -1,0 +1,122 @@
+<style>
+    body {
+        background: #222;
+        font-family: sans-serif;
+        letter-spacing: .02em;
+        color: #aaa;
+        text-transform: capitalize;
+    }
+
+    .container {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+
+    details {
+        position: relative;
+        width: auto;
+        height: auto;
+        overflow: hidden;
+        max-height: 2.5em !important;
+        transition: all 0.01s ease-in-out;
+    }
+
+    details::-webkit-details-marker {
+        display: none;
+    }
+
+    details>summary {
+        position: relative;
+        width: fit-content;
+        margin: 0.5em 0;
+        color: #222;
+        font-size: 1.1em;
+        padding: 0 0.5em 0.2em;
+        background: #9689bfdf;
+        border-radius: 3px;
+    }
+
+    details>summary>summary:before {
+        content: '⊞';
+        color: #eee;
+        font-size: 0.5em;
+        margin-right: 0.5em;
+    }
+
+    details>summary[open]>summary {
+        background: #9689bfdf;
+        color: #aaaaaa60;
+    }
+
+    details>summary[open]>summary:before {
+        content: '-';
+        color: #aaaaaa60;
+    }
+
+    .folder {
+        width: 100%;
+        margin: 0.5em;
+        padding: 0 0 0.5em 1.5em;
+        border-left: 0.1em #aaaaaa60 solid;
+        border-bottom: 0.1em #aaaaaa60 solid;
+    }
+
+    p {
+        margin: 0;
+        padding: 4px 0 4px 0;
+        font-size: 1em;
+    }
+
+    details[open] {
+        height: auto;
+        max-height: 99em !important;
+        transition: all 1.2s ease;
+    }
+
+    details:not([open]) .folder {
+        height: 0px !important;
+
+    }
+</style>
+<div class="container">
+    <details open="open">
+        <summary>myproject</summary>
+        <div class="folder">
+            <p>app.py</p>
+            <details open="open">
+                <summary>static</summary>
+                <div class="folder">
+                    <details>
+                        <summary>css</summary>
+                        <div class="folder">
+                            <p>index.css</p>
+                            <p>template.css</p>
+                        </div>
+                    </details>
+                    <details open="open">
+                        <summary>js</summary>
+                        <div class="folder">
+                            <p>index.js</p>
+                            <p>jquery-min.js</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>img</summary>
+                        <div class="folder">
+                            <p>banner.png</p>
+                            <p>foo.png</p>
+                        </div>
+                    </details>
+                </div>
+            </details>
+            <details open="open">
+                <summary>templates</summary>
+                <div class="folder">
+                    <p>index.html</p>
+                    <p>template.html</p>
+                </div>
+            </details>
+        </div>
+    </details>
+</div>
