@@ -1,32 +1,56 @@
 - Rithik
-    - Linux 
-        - Shell scripting
-        - Distros
-        - Dotfiles
-        - Customization 
+  - Linux 
+    - Shell scripting
+    - Distros
+    - Dotfiles
+    - Customization 
     - Web
-        - Backend
-            - Java
-            - Sql
-            - Spring boot
-        - Frontend
-            - Javascript
-            - React
-            - Html
-            - Css
+      - Backend
+        - Java
+        - Sql
+        - Spring boot
+      - Frontend
+        - Javascript
+        - React
+        - Html
+        - Css
     - Anime
-        - Watched
-        - To be watched
+      - Watched
+        - adfdsfs
+        - vfsdfsdfsdf
+        - afsdfsdfs
+        - dfssdfsdf
+        - fsdfsdfdf
+          - sdfsdfsdf
+          - dsfsdf
+          - sdfsdf
+          - sdfsdfsdfsdfsdf
+            - sdfsdf
+            - dgfdssdfsdf
+              - gdfgsdfsdfsdfsdfsdf
+              - sdfsdfsdf
+              - sdfsdfsdf
+              - sdfsdfs
+                - sdfsdfsdf
+                - sdfsdfsd
+                - fsdf
+                - sdf
+                - sdf
+                - sdf
+                - dfsdfsdfsdfs
+                  - dsfsdfsdfsdfsdfsdf
+        - dfsfdsfsdf
+      - To be watched
     - Movies
-        - Watched
-        - To be watched
+      - Watched
+      - To be watched
     - Series 
-        - Watched
-        - To be watched
+      - Watched
+      - To be watched
     - Gaming
-        - Played games list
-        - To be played
-        - Gaming hardware
+      - Played games list
+      - To be played
+      - Gaming hardware
     - Digital Art
     - Books
     - House plan & building

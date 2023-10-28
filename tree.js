@@ -15,7 +15,6 @@ function para(data, tab) {
 }
 
 function folder(data, tab='') {
-    console.log(data, tab)
   return `<ul class='folder'><li>${tab}<span>|--  </span/>${data}</li>`;
 }
 
@@ -35,7 +34,7 @@ function convert(data) {
     } else {
       // calc tab space
       const padding = data[i].split("-")[0].length / 4;
-      const tabspace = "&emsp;".repeat(padding * 5);
+      const tabspace = "&emsp;".repeat(padding * 10);
       let regReplaced = data[i].replace(Ulist, "");
 
       if (i + 1 < data.length) {
