@@ -1,27 +1,16 @@
-<script>
-let isOpen = false;
-    function expandCollapse() {
-        console.log(isOpen)
-        document.querySelectorAll(".folder").forEach(folder => {
-            if(isOpen) {
-                folder.removeAttribute("open");
-                document.getElementById("expand").innerText = '+';
-            } else {
-                folder.setAttribute("open", "open");
-                document.getElementById("expand").innerText = '-';
-            }
-        })
-        isOpen = !isOpen;
-    }
-</script><style>body {
+<style>* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
     background: rgb(7, 8, 9);
     font-family: sans-serif;
     letter-spacing: .04em;
-    font-size: 0.75em;
-    color: rgb(49, 120, 198);    ;
+    font-size: 0.9em;
+    color: rgb(49, 120, 198);
     text-transform: capitalize;
-    padding: 0;
-    margin: 0;
+
     height: 100vh;
     overflow: auto;
 }
@@ -39,88 +28,39 @@ body::-webkit-scrollbar-thumb {
     border-radius: 12px;
 }
 
-.expand {
-    cursor: pointer;
-}
 .container {
     width: 90%;
     margin: auto;
 }
 
-details {
+ul {
     width: auto;
     height: auto;
-    overflow: hidden;
-    max-height: 2.5em !important;
     transition: all 0.01s ease-in-out;
 }
 
-details::-webkit-details-marker {
-    display: none;
-}
-
-summary {
+li {
     width: fit-content;
     border-radius: 3px;
     cursor: pointer;
     border: none;
+    list-style-type: none;
 }
 
 .folder {
-    display: block;
     width: 100%;
     height: fit-content;
     width: fit-content;
-    padding: 0 0 0.4em 0.4em;
-    margin: 1em;
-    border-left: 0.05em #ababab60 solid;
-    border-bottom: 0.05em #ababab60 solid;
-}
-
-summary::before {
-    content: '+';
-    padding-right: 0.8em;
-    height: fit-content;
-    margin: 0;
-}
-
-.folder-sub {
-    display: block;
-    height: fit-content;
-    margin: 0;
-    color: rgb(137, 87, 229);
-}
-
-p::before {
-    content: '-';
-    padding-right: 0.8em;
-    height: fit-content;
-    margin: 0;
+    padding: 0.4em 0;
 }
 
 p {
-    padding: 1px;
-    margin: 8px 0;
-    margin-left: 16px;
     width: fit-content;
     cursor: pointer;
     color: #d2d2d2;
-}
-
-details[open] {
-    max-height: 100% !important;
-    transition: all 0.2s ease;
-}
-
-details summary::-webkit-details-marker {
-  display:none;
-}
-
-details:not([open]) .folder {
-    max-height: 0 !important;
-    transition: all 0.2s ease;
-}</style><div class='container'><div id='expand' class='expand' onclick='expandCollapse()'>+</div><details class='folder' open><summary>Rithik</summary><div class="folder-sub"><details class='folder' false><summary>Linux </summary><div class="folder-sub"><p>Shell scripting</p><p>Distros</p><p>Dotfiles</p><p>Customization </p></div></details><details class='folder' false><summary>Web</summary><div class="folder-sub"><details class='folder' false><summary>Backend</summary><div class="folder-sub"><p>Java</p><p>Sql</p><p>Spring boot</p></div></details><details class='folder' false><summary>Frontend</summary><div class="folder-sub"><p>Javascript</p><p>React</p><p>Html</p><p>Css</p></div></details></div></details><details class='folder' false><summary>Anime</summary><div class="folder-sub"><p>Watched</p><p>To be watched</p></div></details><details class='folder' false><summary>Movies</summary><div class="folder-sub"><p>Watched</p><p>To be watched</p></div></details><details class='folder' false><summary>Series </summary><div class="folder-sub"><p>Watched</p><p>To be watched</p></div></details><details class='folder' false><summary>Gaming</summary><div class="folder-sub"><p>Played games list</p><p>To be played</p><p>Gaming hardware</p></div></details><p>Digital Art</p><p>Books</p><p>House plan & building</p><p>Gardening</p></div></details><details class='folder' false><summary>Rithik</summary><div class="folder-sub"><details class='folder' false><summary>Linux </summary><div class="folder-sub"><p>Shell scripting</p><p>Distros</p><p>Dotfiles</p><p>Customization </p></div></details><details class='folder' false><summary>Web</summary><div class="folder-sub"><details class='folder' false><summary>Backend</summary><div class="folder-sub"><p>Java</p><p>Sql</p><p>Spring boot</p></div></details><details class='folder' false><summary>Frontend</summary><div class="folder-sub"><p>Javascript</p><p>React</p><p>Html</p><p>Css</p></div></details></div></details><details class='folder' false><summary>Anime</summary><div class="folder-sub"><p>Watched</p><p>To be watched</p></div></details><details class='folder' false><summary>Movies</summary><div class="folder-sub"><p>Watched</p><p>To be watched</p></div></details><details class='folder' false><summary>Series </summary><div class="folder-sub"><p>Watched</p><p>To be watched</p></div></details><details class='folder' false><summary>Gaming</summary><div class="folder-sub"><p>Played games list</p><p>To be played</p><p>Gaming hardware</p></div></details><p>Digital Art</p><p>Books</p><p>House plan & building</p><p>Gardening</p></div></details></div></details>
+    padding: 0.4em 0;
+}</style><div class='container'><ul class='folder'><li><span>|--  </span/>Rithik</li><ul class='folder'><li>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Linux </li><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Shell scripting</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Distros</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Dotfiles</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Customization </p></ul><ul class='folder'><li>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Web</li><ul class='folder'><li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Backend</li><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Java</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Sql</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Spring boot</p></ul><ul class='folder'><li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Frontend</li><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Javascript</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>React</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Html</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Css</p></ul></ul><ul class='folder'><li>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Anime</li><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Watched</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>To be watched</p></ul><ul class='folder'><li>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Movies</li><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Watched</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>To be watched</p></ul><ul class='folder'><li>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Series </li><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Watched</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>To be watched</p></ul><ul class='folder'><li>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Gaming</li><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Played games list</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>To be played</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Gaming hardware</p></ul><p>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Digital Art</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Books</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>House plan & building</p><p>&emsp;&emsp;&emsp;&emsp;&emsp;<span>|--  </span/>Gardening</p></ul>
    
     </div>
-    </details>
+    </ul>
    </div>

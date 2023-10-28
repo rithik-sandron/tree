@@ -4,38 +4,19 @@ const { exec } = require("node:child_process");
 
 const Ulist = /^\s*- /gim;
 
-const close = `</div></details>`;
-
-const script = `<script>
-let isOpen = false;
-    function expandCollapse() {
-        console.log(isOpen)
-        document.querySelectorAll(".folder").forEach(folder => {
-            if(isOpen) {
-                folder.removeAttribute("open");
-                document.getElementById("expand").innerText = '+';
-            } else {
-                folder.setAttribute("open", "open");
-                document.getElementById("expand").innerText = '-';
-            }
-        })
-        isOpen = !isOpen;
-    }
-</script>`;
+const close = `</ul>`;
 
 function container() {
-   
-  return "<div class='container'><div id='expand' class='expand' onclick='expandCollapse()'>+</div>";
+  return "<div class='container'>";
 }
 
-function para(data) {
-  return `<p>${data}</p>`;
+function para(data, tab) {
+  return `<p>${tab}<span>|--  </span/>${data}</p>`;
 }
 
-function folder(data, isOpen = false) {
-  return `<details class='folder' ${
-    isOpen && "open"
-  }><summary>${data}</summary><div class="folder-sub">`;
+function folder(data, tab='') {
+    console.log(data, tab)
+  return `<ul class='folder'><li>${tab}<span>|--  </span/>${data}</li>`;
 }
 
 // to convert markdown to html
@@ -49,26 +30,27 @@ function convert(data) {
     if (ini) {
       const regReplaced = data[i].replace(Ulist, "");
       dataHtml += container();
-      dataHtml += folder(regReplaced, ini);
+      dataHtml += folder(regReplaced);
       ini = false;
     } else {
       // calc tab space
       const padding = data[i].split("-")[0].length / 4;
-      const regReplaced = data[i].replace(Ulist, "");
+      const tabspace = "&emsp;".repeat(padding * 5);
+      let regReplaced = data[i].replace(Ulist, "");
 
       if (i + 1 < data.length) {
         // calc tab space
         const successorPadding = data[i + 1].split("-")[0].length / 4;
         if (successorPadding > padding) {
           nested += 1;
-          dataHtml += folder(regReplaced);
+          dataHtml += folder(regReplaced, tabspace);
         } else if (successorPadding === padding) {
-          dataHtml += para(regReplaced);
+          dataHtml += para(regReplaced, tabspace);
         } else {
           let level = padding - successorPadding;
           // console.log(regReplaced, level, padding, successorPadding);
 
-          dataHtml += para(regReplaced);
+          dataHtml += para(regReplaced, tabspace);
           while (level > 0) {
             dataHtml += close;
             level--;
@@ -76,7 +58,7 @@ function convert(data) {
           nested -= 1;
         }
       } else {
-        dataHtml += para(regReplaced);
+        dataHtml += para(regReplaced, tabspace);
         while (nested > 0) {
           dataHtml += close;
           nested--;
@@ -88,7 +70,7 @@ function convert(data) {
   dataHtml += `
    
     </div>
-    </details>
+    </ul>
    </div>`;
   return dataHtml;
 }
@@ -108,7 +90,7 @@ async function read() {
 async function write(data) {
   const filePath = path.join(__dirname, `/rithik.html`);
   const style = await readStyle();
-  await fs.writeFile(filePath, script + style + data);
+  await fs.writeFile(filePath, style + data);
 }
 
 // read and write
