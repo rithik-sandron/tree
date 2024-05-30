@@ -1,4 +1,4 @@
-import { green, blue, gray } from "https://deno.land/std/fmt/colors.ts";
+import { green, blue } from "https://deno.land/std/fmt/colors.ts";
 
 const SPACE = " ";
 const LINE = "├── ";
@@ -6,7 +6,7 @@ const LINE_LAST = "└── ";
 const NEW_LINE = "\n";
 const DIR_SLASH = "/";
 
-let tree;
+let tree = "";
 
 function addPadding(pad, lvl) {
   const e = pad / lvl;
@@ -20,7 +20,7 @@ function addPadding(pad, lvl) {
 
 async function show(dr) {
   tree += "\n" + green(dr) + "\n";
-  await construct(0, ".", 0);
+  await construct(0, dr, 0);
   return tree;
 }
 
@@ -36,10 +36,11 @@ async function construct(pad, dr, lvl) {
       await construct(pad + 3, dr + DIR_SLASH + d.name, lvl + 1);
     } else if (d.isFile) {
       addPadding(pad, lvl);
-      tree += (next.done ? LINE_LAST : LINE) + gray(d.name) + NEW_LINE;
+      tree += (next.done ? LINE_LAST : LINE) + d.name + NEW_LINE;
     }
     d = next;
   }
 }
 
-console.log(await show(Deno.args[0] ? Deno.args[0] : "."));
+const res = await show(Deno.args[0] ? Deno.args[0] : ".")
+console.log(res);
