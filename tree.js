@@ -1,106 +1,45 @@
-const path = require("path");
-const fs = require("node:fs/promises");
-const { exec } = require("node:child_process");
+import { green, blue, gray } from "https://deno.land/std/fmt/colors.ts";
 
-const Ulist = /^\s*- /gim;
+const SPACE = " ";
+const LINE = "├── ";
+const LINE_LAST = "└── ";
+const NEW_LINE = "\n";
+const DIR_SLASH = "/";
 
-const close = `</ul>`;
+let tree;
 
-function container() {
-  return "<div class='container'>";
-}
-
-function para(data, tab) {
-  return `<p>${tab}<span>|--  </span/>${data}</p>`;
-}
-
-function folder(data, tab='') {
-  return `<ul class='folder'><li>${tab}<span>|--  </span/>${data}</li>`;
-}
-
-// to convert markdown to html
-function convert(data) {
-  data = data.split("\n");
-  let dataHtml = ``;
-  let ini = true;
-  let i = 0;
-  let nested = 0;
-  while (i < data.length) {
-    if (ini) {
-      const regReplaced = data[i].replace(Ulist, "");
-      dataHtml += container();
-      dataHtml += folder(regReplaced);
-      ini = false;
-    } else {
-      // calc tab space
-      const padding = data[i].split("-")[0].length / 4;
-      const tabspace = "&emsp;".repeat(padding * 10);
-      let regReplaced = data[i].replace(Ulist, "");
-
-      if (i + 1 < data.length) {
-        // calc tab space
-        const successorPadding = data[i + 1].split("-")[0].length / 4;
-        if (successorPadding > padding) {
-          nested += 1;
-          dataHtml += folder(regReplaced, tabspace);
-        } else if (successorPadding === padding) {
-          dataHtml += para(regReplaced, tabspace);
-        } else {
-          let level = padding - successorPadding;
-          // console.log(regReplaced, level, padding, successorPadding);
-
-          dataHtml += para(regReplaced, tabspace);
-          while (level > 0) {
-            dataHtml += close;
-            level--;
-          }
-          nested -= 1;
-        }
-      } else {
-        dataHtml += para(regReplaced, tabspace);
-        while (nested > 0) {
-          dataHtml += close;
-          nested--;
-        }
-      }
+function addPadding(pad, lvl) {
+  const e = pad / lvl;
+  for (let i = 0; i < lvl; i++) {
+    if (pad > 0) {
+      tree += "│";
+      tree += SPACE.repeat(e);
     }
-    i++;
   }
-  dataHtml += `
-   
-    </div>
-    </ul>
-   </div>`;
-  return dataHtml;
 }
 
-async function readStyle() {
-  const filePath = path.join(__dirname, `/tree.css`);
-  const contents = await fs.readFile(filePath, { encoding: "utf8" });
-  return `<style>${contents}</style>`;
+async function show(dr) {
+  tree += "\n" + green(dr) + "\n";
+  await construct(0, ".", 0);
+  return tree;
 }
 
-async function read() {
-  const filePath = path.join(__dirname, `/rithik.md`);
-  const contents = await fs.readFile(filePath, { encoding: "utf8" });
-  return convert(contents);
-}
-
-async function write(data) {
-  const filePath = path.join(__dirname, `/rithik.html`);
-  const style = await readStyle();
-  await fs.writeFile(filePath, style + data);
-}
-
-// read and write
-read().then((data) => {
-  write(data);
-});
-
-// to open generated html in browser
-exec("open rithik.html", (error) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
+async function construct(pad, dr, lvl) {
+  let iterator = await Deno.readDir(dr)[Symbol.asyncIterator]();
+  let d = await iterator.next();
+  while (!d.done) {
+    d = d.value;
+    const next = await iterator.next();
+    if (d.isDirectory) {
+      addPadding(pad, lvl);
+      tree += (next.done ? LINE_LAST : LINE) + blue(d.name) + NEW_LINE;
+      await construct(pad + 3, dr + DIR_SLASH + d.name, lvl + 1);
+    } else if (d.isFile) {
+      addPadding(pad, lvl);
+      tree += (next.done ? LINE_LAST : LINE) + gray(d.name) + NEW_LINE;
+    }
+    d = next;
   }
-});
+}
+
+console.log(await show(Deno.args[0] ? Deno.args[0] : "."));
